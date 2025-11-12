@@ -1,0 +1,3 @@
+/home/afz/workzone/msql-db-helper/teton-cam/build/CMakeFiles/mysql_migration.dir
+/home/afz/workzone/msql-db-helper/teton-cam/build/CMakeFiles/edit_cache.dir
+/home/afz/workzone/msql-db-helper/teton-cam/build/CMakeFiles/rebuild_cache.dir
