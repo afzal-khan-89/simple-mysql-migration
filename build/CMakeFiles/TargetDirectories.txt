@@ -1,3 +1,0 @@
-/home/afz/workzone/teton/teton-cam/simple-db-migration/build/CMakeFiles/mysql_migration.dir
-/home/afz/workzone/teton/teton-cam/simple-db-migration/build/CMakeFiles/edit_cache.dir
-/home/afz/workzone/teton/teton-cam/simple-db-migration/build/CMakeFiles/rebuild_cache.dir
