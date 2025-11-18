@@ -8,7 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/afz/workzone/msql-db-helper/teton-cam/mysql_migration.cpp" "CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o" "gcc" "CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o.d"
+  "/home/afz/workzone/teton/teton-cam/simple-db-migration/Migration_parser.cpp" "CMakeFiles/mysql_migration.dir/Migration_parser.cpp.o" "gcc" "CMakeFiles/mysql_migration.dir/Migration_parser.cpp.o.d"
+  "/home/afz/workzone/teton/teton-cam/simple-db-migration/mysql_migration.cpp" "CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o" "gcc" "CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

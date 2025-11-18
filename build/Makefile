@@ -57,10 +57,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/afz/workzone/msql-db-helper/teton-cam
+CMAKE_SOURCE_DIR = /home/afz/workzone/teton/teton-cam/simple-db-migration
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/afz/workzone/msql-db-helper/teton-cam/build
+CMAKE_BINARY_DIR = /home/afz/workzone/teton/teton-cam/simple-db-migration/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/afz/workzone/msql-db-helper/teton-cam/build/CMakeFiles /home/afz/workzone/msql-db-helper/teton-cam/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/afz/workzone/teton/teton-cam/simple-db-migration/build/CMakeFiles /home/afz/workzone/teton/teton-cam/simple-db-migration/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/afz/workzone/msql-db-helper/teton-cam/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/afz/workzone/teton/teton-cam/simple-db-migration/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -129,6 +129,30 @@ mysql_migration/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_migration.dir/build.make CMakeFiles/mysql_migration.dir/build
 .PHONY : mysql_migration/fast
 
+Migration_parser.o: Migration_parser.cpp.o
+.PHONY : Migration_parser.o
+
+# target to build an object file
+Migration_parser.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_migration.dir/build.make CMakeFiles/mysql_migration.dir/Migration_parser.cpp.o
+.PHONY : Migration_parser.cpp.o
+
+Migration_parser.i: Migration_parser.cpp.i
+.PHONY : Migration_parser.i
+
+# target to preprocess a source file
+Migration_parser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_migration.dir/build.make CMakeFiles/mysql_migration.dir/Migration_parser.cpp.i
+.PHONY : Migration_parser.cpp.i
+
+Migration_parser.s: Migration_parser.cpp.s
+.PHONY : Migration_parser.s
+
+# target to generate assembly for a file
+Migration_parser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysql_migration.dir/build.make CMakeFiles/mysql_migration.dir/Migration_parser.cpp.s
+.PHONY : Migration_parser.cpp.s
+
 mysql_migration.o: mysql_migration.cpp.o
 .PHONY : mysql_migration.o
 
@@ -162,6 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... mysql_migration"
+	@echo "... Migration_parser.o"
+	@echo "... Migration_parser.i"
+	@echo "... Migration_parser.s"
 	@echo "... mysql_migration.o"
 	@echo "... mysql_migration.i"
 	@echo "... mysql_migration.s"

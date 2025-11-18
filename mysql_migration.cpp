@@ -1,259 +1,3 @@
-// #include <iostream>
-// #include <cppconn/prepared_statement.h>
-// #include <cppconn/driver.h>
-// #include <cppconn/connection.h>
-// #include <cppconn/statement.h>
-// #include <cppconn/resultset.h>
-// #include <memory>
-// #include <vector>
-// #include <string>
-// #include <algorithm>
-// #include <regex>
-// #include <unordered_map>
-
-// using namespace std;
-
-// // Column definition
-// struct Column {
-//     string name;
-//     string type; // SQL type + constraints as string
-// };
-
-// // Table definition
-// struct Table {
-//     string name;
-//     vector<Column> columns;
-// };
-
-// // Example tables
-// vector<Table> tables = {
-//     { "users", {
-//         {"id", "INT AUTO_INCREMENT PRIMARY KEY"},
-//         {"name", "VARCHAR(100)"},
-//         {"email", "VARCHAR(255) UNIQUE"},
-//         {"created_at", "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"}
-//     }},
-//     { "products", {
-//         {"id", "INT AUTO_INCREMENT PRIMARY KEY"},
-//         {"name", "VARCHAR(255)"},
-//         {"price", "DECIMAL(10,2)"},
-//         {"stock", "INT DEFAULT 0"}
-//     }},
-//     { "orders", {
-//         {"id", "INT AUTO_INCREMENT PRIMARY KEY"},
-//         {"user_id", "INT"},
-//         {"product_id", "INT"},
-//         {"quantity", "INT"},
-//         {"created_at", "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"}
-//     }}
-// };
-
-// // Check if table exists
-// bool tableExists(sql::Connection* conn, const string& table) 
-// {
-//     unique_ptr<sql::Statement> stmt(conn->createStatement());
-//     string query = "SHOW TABLES LIKE '" + table + "'";
-//     unique_ptr<sql::ResultSet> res(stmt->executeQuery(query));
-//     return res->next();
-// }
-
-// // Check if column exists
-// bool columnExists(sql::Connection* conn, const string& table, const string& column) 
-// {
-//     unique_ptr<sql::PreparedStatement> stmt(
-//         conn->prepareStatement("SELECT COLUMN_TYPE FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=? AND TABLE_NAME=? AND COLUMN_NAME=?")
-//     );
-//     stmt->setString(1, conn->getSchema());
-//     stmt->setString(2, table);
-//     stmt->setString(3, column);
-
-//     unique_ptr<sql::ResultSet> res(stmt->executeQuery());
-//     return res->next();
-// }
-
-// // Get existing column type
-// string getColumnType(sql::Connection* conn, const string& table, const string& column) 
-// {
-//     unique_ptr<sql::PreparedStatement> stmt(
-//         conn->prepareStatement("SELECT COLUMN_TYPE FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=? AND TABLE_NAME=? AND COLUMN_NAME=?")
-//     );
-//     stmt->setString(1, conn->getSchema());
-//     stmt->setString(2, table);
-//     stmt->setString(3, column);
-
-//     unique_ptr<sql::ResultSet> res(stmt->executeQuery());
-//     if (res->next()) 
-//     {
-//         return res->getString("COLUMN_TYPE");
-//     }
-//     return "";
-// }
-
-// // Create table
-// void createTable(sql::Connection* conn, const Table& table) 
-// {
-//     string query = "CREATE TABLE IF NOT EXISTS " + table.name + " (";
-//     for (size_t i = 0; i < table.columns.size(); ++i) {
-//         query += table.columns[i].name + " " + table.columns[i].type;
-//         if (i < table.columns.size() - 1) query += ", ";
-//     }
-//     query += ")";
-//     unique_ptr<sql::Statement> stmt(conn->createStatement());
-//     stmt->execute(query);
-//     cout << "✅ Created table: " << table.name << endl;
-// }
-
-// std::string normalizeType(const std::string& colType) {
-//     std::string type = colType;
-
-//     // Step 1: Remove everything after space (e.g. "DEFAULT 0", "NOT NULL")
-//     size_t spacePos = type.find(' ');
-//     if (spacePos != std::string::npos) {
-//         type = type.substr(0, spacePos);
-//     }
-
-//     // Step 2: Remove size/precision: (11), (10,2), etc.
-//     std::regex sizeRegex(R"(\(\d+(,\d+)?\))");
-//     type = std::regex_replace(type, sizeRegex, "");
-
-//     // Step 3: Trim whitespace
-//     type.erase(0, type.find_first_not_of(" \t"));
-//     type.erase(type.find_last_not_of(" \t") + 1);
-
-//     // Step 4: Uppercase
-//     std::transform(type.begin(), type.end(), type.begin(), ::toupper);
-
-//     // Step 5: Normalize known aliases
-//     static const std::unordered_map<std::string, std::string> aliasMap = {
-//         {"INT", "INT"},
-//         {"INTEGER", "INT"},
-//         {"TINYINT", "TINYINT"},
-//         {"SMALLINT", "SMALLINT"},
-//         {"MEDIUMINT", "MEDIUMINT"},
-//         {"BIGINT", "BIGINT"},
-//         {"DECIMAL", "DECIMAL"},
-//         {"NUMERIC", "DECIMAL"},
-//         {"FLOAT", "FLOAT"},
-//         {"DOUBLE", "DOUBLE"},
-//         {"VARCHAR", "VARCHAR"},
-//         {"CHAR", "CHAR"},
-//         {"TEXT", "TEXT"},
-//         {"TIMESTAMP", "TIMESTAMP"},
-//         {"DATETIME", "DATETIME"},
-//         {"DATE", "DATE"}
-//     };
-
-//     auto it = aliasMap.find(type);
-//     return it != aliasMap.end() ? it->second : type;
-// }
-
-// void updateTable(sql::Connection* conn, const Table& table) 
-// {
-//     for (const auto& col : table.columns) 
-//     {
-//         if (col.type.find("PRIMARY KEY") != std::string::npos)
-//             continue;
-
-//         if (!columnExists(conn, table.name, col.name)) 
-//         {
-//             std::string alter = "ALTER TABLE " + table.name + " ADD COLUMN " + col.name + " " + col.type;
-//             conn->createStatement()->execute(alter);
-//             std::cout << "→ Added missing column '" << col.name << "' to table '" << table.name << "'\n";
-//         } 
-//         else 
-//         {
-//             std::string existingType = getColumnType(conn, table.name, col.name);
-//             std::string expectedNorm = normalizeType(col.type);
-//             std::string existingNorm = normalizeType(existingType);
-
-//             if (expectedNorm != existingNorm) 
-//             {
-//                 std::string alter = "ALTER TABLE " + table.name + " MODIFY COLUMN " + col.name + " " + col.type;
-//                 conn->createStatement()->execute(alter);
-//                 std::cout << "→ Modified column '" << col.name << "' in table '" << table.name 
-//                           << "' from '" << existingType << "' to '" << col.type << "'\n";
-//             }
-//             // else: types are equivalent → no action
-//         }
-//     }
-// }
-
-// // Process all tables
-// bool processTables(sql::Connection* conn, const vector<Table>& tables) 
-// {
-//     try {
-//         for (const auto& table : tables) 
-//         {
-//             if (!tableExists(conn, table.name)) 
-//             {
-//                 createTable(conn, table);
-//             } 
-//             else 
-//             {
-//                 cout << "Table exists: " << table.name << ". Updating columns..." << endl;
-//                 updateTable(conn, table);
-//             }
-//         }
-//         return true;
-//     } catch (sql::SQLException& e) {
-//         cerr << "SQL Error: " << e.what()
-//              << " (Code: " << e.getErrorCode()
-//              << ", SQLState: " << e.getSQLState() << ")" << endl;
-//         return false;
-//     }
-// }
-
-// int main() 
-// {
-//     const string server   = "tcp://127.0.0.1:3306";
-//     const string username = "root";
-//     const string password = "winter2summer";
-//     const string database = "ip_cam";
-
-//     try {
-//         sql::Driver* driver = get_driver_instance();
-//         unique_ptr<sql::Connection> conn(driver->connect(server, username, password));
-//         conn->setSchema(database);
-
-//         cout << "Connected to database: " << database << endl;
-//         cout << "Processing tables..." << endl;
-
-//         if (!processTables(conn.get(), tables)) {
-//             cout << "❌ Table migration stopped due to an error." << endl;
-//             return 1;
-//         }
-
-//         cout << "\n✅ All tables migrated successfully!" << endl;
-
-//     } catch (sql::SQLException &e) {
-//         cerr << "SQL Connection Error: " << e.what()
-//              << " (Code: " << e.getErrorCode()
-//              << ", SQLState: " << e.getSQLState() << ")" << endl;
-//         return 1;
-//     }
-
-//     return 0;
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/********************************************************************
- *  MySQL schema migration – create / add / modify / delete columns *
- *  Uses MySQL Connector/C++                                        *
- ********************************************************************/
 #include <iostream>
 #include <cppconn/driver.h>
 #include <cppconn/connection.h>
@@ -268,50 +12,17 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "Migration_parser.h"
+
 using namespace std;
 
-/* --------------------------------------------------------------- */
-/*  Schema definition                                              */
-/* --------------------------------------------------------------- */
-struct Column {
-    string name;
-    string type;               // e.g. "INT AUTO_INCREMENT PRIMARY KEY"
-};
 
-struct Table {
-    string name;
-    vector<Column> columns;
-};
 
-/* -----------------------------------------------------------------
- *  Put your desired schema here – add/remove columns as you wish
- * ----------------------------------------------------------------- */
-vector<Table> desiredTables = {
-    { "users", {
-        {"id",        "INT AUTO_INCREMENT PRIMARY KEY"},
-        {"name",      "VARCHAR(100)"},
-        {"email",     "VARCHAR(255) UNIQUE"},
-        {"created_at","TIMESTAMP DEFAULT CURRENT_TIMESTAMP"}
-    }},
-    { "products", {
-        {"id",        "INT AUTO_INCREMENT PRIMARY KEY"},
-        {"name",      "VARCHAR(32)"},
-        {"price",     "INT NOT NULL DEFAULT 500"},
-        {"stock",     "INT DEFAULT 10"}
-    }},
-    { "orders", {
-        {"id",         "INT AUTO_INCREMENT PRIMARY KEY"},
-        {"user_id",    "INT"},
-        {"product_id", "INT"},
-        {"quantity",   "INT"},
-        {"created_at", "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"}
-    }}
-};
+vector<Table> desiredTables;
 
-/* --------------------------------------------------------------- */
-/*  Helper functions                                               */
-/* --------------------------------------------------------------- */
-bool tableExists(sql::Connection* conn, const string& tbl) {
+
+bool tableExists(sql::Connection* conn, const string& tbl) 
+{
     unique_ptr<sql::Statement> stmt(conn->createStatement());
     string q = "SHOW TABLES LIKE '" + tbl + "'";
     unique_ptr<sql::ResultSet> rs(stmt->executeQuery(q));
@@ -319,7 +30,8 @@ bool tableExists(sql::Connection* conn, const string& tbl) {
 }
 
 /* true  -> column exists in DB */
-bool columnExists(sql::Connection* conn, const string& tbl, const string& col) {
+bool columnExists(sql::Connection* conn, const string& tbl, const string& col) 
+{
     unique_ptr<sql::PreparedStatement> ps(
         conn->prepareStatement(
             "SELECT 1 FROM information_schema.COLUMNS "
@@ -332,8 +44,8 @@ bool columnExists(sql::Connection* conn, const string& tbl, const string& col) {
     return rs->next();
 }
 
-/* Returns the exact COLUMN_TYPE string from information_schema */
-string getColumnType(sql::Connection* conn, const string& tbl, const string& col) {
+string getColumnType(sql::Connection* conn, const string& tbl, const string& col) 
+{
     unique_ptr<sql::PreparedStatement> ps(
         conn->prepareStatement(
             "SELECT COLUMN_TYPE FROM information_schema.COLUMNS "
@@ -346,9 +58,7 @@ string getColumnType(sql::Connection* conn, const string& tbl, const string& col
     return rs->next() ? rs->getString(1) : "";
 }
 
-/* --------------------------------------------------------------- */
-/*  Normalise a type string so that "int(11)" == "INT"            */
-/* --------------------------------------------------------------- */
+
 string normaliseType(const string& raw) {
     string t = raw;
 
@@ -473,12 +183,15 @@ void syncTable(sql::Connection* conn, const Table& desired) {
         bool has_auto_inc = (upper.find("AUTO_INCREMENT") != string::npos);
         bool include_pk = false;
 
-        if (!columnExists(conn, desired.name, name)) {
+        if (!columnExists(conn, desired.name, name)) 
+        {
             // ----- ADD -----
             include_pk = is_pk_col && !desired_pk_existed;  // Include for new PK columns
-            if (!include_pk) {
+            if (!include_pk) 
+            {
                 size_t pos = upper.find("PRIMARY KEY");
-                if (pos != string::npos) {
+                if (pos != string::npos) 
+                {
                     effective_type.erase(pos, 11);
                     upper.erase(pos, 11);
                 }
@@ -528,66 +241,8 @@ void syncTable(sql::Connection* conn, const Table& desired) {
         cout << "Deleted column '" << col << "' from '" << desired.name << "'" << endl;
     }
 }
-
-// void syncTable(sql::Connection* conn, const Table& desired) {
-//     // ---- 1. Collect columns that exist in the DB -----------------
-//     unordered_set<string> dbColumns;
-//     {
-//         unique_ptr<sql::PreparedStatement> ps(
-//             conn->prepareStatement(
-//                 "SELECT COLUMN_NAME FROM information_schema.COLUMNS "
-//                 "WHERE TABLE_SCHEMA=? AND TABLE_NAME=?")
-//         );
-//         ps->setString(1, conn->getSchema());
-//         ps->setString(2, desired.name);
-//         unique_ptr<sql::ResultSet> rs(ps->executeQuery());
-//         while (rs->next()) dbColumns.insert(rs->getString(1));
-//     }
-
-//     // ---- 2. Add / modify columns ---------------------------------
-//     for (const auto& col : desired.columns) {
-//         const string& name = col.name;
-//         dbColumns.erase(name);                 // will be removed later if still present
-
-//         if (!columnExists(conn, desired.name, name)) {
-//             // ----- ADD -----
-//             string sql = "ALTER TABLE " + desired.name +
-//                          " ADD COLUMN " + name + " " + col.type;
-//             conn->createStatement()->execute(sql);
-//             cout << "Added column '" << name << "' to '" << desired.name << "'" << endl;
-//             continue;
-//         }
-
-//         // ----- MODIFY (type really changed) -----
-//         string dbType   = getColumnType(conn, desired.name, name);
-//         string normWant = normaliseType(col.type);
-//         string normHave = normaliseType(dbType);
-
-//         if (normWant != normHave) {
-//             string sql = "ALTER TABLE " + desired.name +
-//                          " MODIFY COLUMN " + name + " " + col.type;
-//             conn->createStatement()->execute(sql);
-//             cout << "Modified column '" << name << "' in '" << desired.name
-//                  << "' (was '" << dbType << "')" << endl;
-//         }
-//     }
-
-//     // ---- 3. Delete columns that are no longer desired ------------
-//     for (const auto& col : dbColumns) {
-//         // Skip primary-key columns that are auto-generated by MySQL
-//         // (you can customise this list if you have other protected cols)
-//         if (col == "id") continue;
-
-//         string sql = "ALTER TABLE " + desired.name + " DROP COLUMN " + col;
-//         conn->createStatement()->execute(sql);
-//         cout << "Deleted column '" << col << "' from '" << desired.name << "'" << endl;
-//     }
-// }
-
-/* --------------------------------------------------------------- */
-/*  Main migration routine                                         */
-/* --------------------------------------------------------------- */
-bool migrate(sql::Connection* conn, const vector<Table>& schema) {
+bool migrate(sql::Connection* conn, const vector<Table>& schema) 
+{
     try {
         for (const auto& tbl : schema) {
             if (!tableExists(conn, tbl.name)) {
@@ -614,6 +269,7 @@ int main() {
     const string dbname   = "ip_cam";
 
     try {
+        MigrationParser::parse_table_from_file(desiredTables, "schema.conf"); 
         sql::Driver* driver = get_driver_instance();
         unique_ptr<sql::Connection> con(driver->connect(host, user, pass));
         con->setSchema(dbname);

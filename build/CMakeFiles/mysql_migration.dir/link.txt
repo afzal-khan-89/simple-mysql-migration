@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o -o mysql_migration  -lmysqlcppconn 
+/usr/bin/c++ CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o CMakeFiles/mysql_migration.dir/Migration_parser.cpp.o -o mysql_migration  -lmysqlcppconn 

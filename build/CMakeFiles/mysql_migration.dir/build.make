@@ -53,10 +53,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/afz/workzone/msql-db-helper/teton-cam
+CMAKE_SOURCE_DIR = /home/afz/workzone/teton/teton-cam/simple-db-migration
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/afz/workzone/msql-db-helper/teton-cam/build
+CMAKE_BINARY_DIR = /home/afz/workzone/teton/teton-cam/simple-db-migration/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/mysql_migration.dir/depend.make
@@ -70,30 +70,46 @@ include CMakeFiles/mysql_migration.dir/progress.make
 include CMakeFiles/mysql_migration.dir/flags.make
 
 CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o: CMakeFiles/mysql_migration.dir/flags.make
-CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o: /home/afz/workzone/msql-db-helper/teton-cam/mysql_migration.cpp
+CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o: /home/afz/workzone/teton/teton-cam/simple-db-migration/mysql_migration.cpp
 CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o: CMakeFiles/mysql_migration.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/afz/workzone/msql-db-helper/teton-cam/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o -MF CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o.d -o CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o -c /home/afz/workzone/msql-db-helper/teton-cam/mysql_migration.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/afz/workzone/teton/teton-cam/simple-db-migration/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o -MF CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o.d -o CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o -c /home/afz/workzone/teton/teton-cam/simple-db-migration/mysql_migration.cpp
 
 CMakeFiles/mysql_migration.dir/mysql_migration.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mysql_migration.dir/mysql_migration.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/afz/workzone/msql-db-helper/teton-cam/mysql_migration.cpp > CMakeFiles/mysql_migration.dir/mysql_migration.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/afz/workzone/teton/teton-cam/simple-db-migration/mysql_migration.cpp > CMakeFiles/mysql_migration.dir/mysql_migration.cpp.i
 
 CMakeFiles/mysql_migration.dir/mysql_migration.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mysql_migration.dir/mysql_migration.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/afz/workzone/msql-db-helper/teton-cam/mysql_migration.cpp -o CMakeFiles/mysql_migration.dir/mysql_migration.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/afz/workzone/teton/teton-cam/simple-db-migration/mysql_migration.cpp -o CMakeFiles/mysql_migration.dir/mysql_migration.cpp.s
+
+CMakeFiles/mysql_migration.dir/Migration_parser.cpp.o: CMakeFiles/mysql_migration.dir/flags.make
+CMakeFiles/mysql_migration.dir/Migration_parser.cpp.o: /home/afz/workzone/teton/teton-cam/simple-db-migration/Migration_parser.cpp
+CMakeFiles/mysql_migration.dir/Migration_parser.cpp.o: CMakeFiles/mysql_migration.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/afz/workzone/teton/teton-cam/simple-db-migration/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/mysql_migration.dir/Migration_parser.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mysql_migration.dir/Migration_parser.cpp.o -MF CMakeFiles/mysql_migration.dir/Migration_parser.cpp.o.d -o CMakeFiles/mysql_migration.dir/Migration_parser.cpp.o -c /home/afz/workzone/teton/teton-cam/simple-db-migration/Migration_parser.cpp
+
+CMakeFiles/mysql_migration.dir/Migration_parser.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mysql_migration.dir/Migration_parser.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/afz/workzone/teton/teton-cam/simple-db-migration/Migration_parser.cpp > CMakeFiles/mysql_migration.dir/Migration_parser.cpp.i
+
+CMakeFiles/mysql_migration.dir/Migration_parser.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mysql_migration.dir/Migration_parser.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/afz/workzone/teton/teton-cam/simple-db-migration/Migration_parser.cpp -o CMakeFiles/mysql_migration.dir/Migration_parser.cpp.s
 
 # Object files for target mysql_migration
 mysql_migration_OBJECTS = \
-"CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o"
+"CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o" \
+"CMakeFiles/mysql_migration.dir/Migration_parser.cpp.o"
 
 # External object files for target mysql_migration
 mysql_migration_EXTERNAL_OBJECTS =
 
 mysql_migration: CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o
+mysql_migration: CMakeFiles/mysql_migration.dir/Migration_parser.cpp.o
 mysql_migration: CMakeFiles/mysql_migration.dir/build.make
 mysql_migration: CMakeFiles/mysql_migration.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/afz/workzone/msql-db-helper/teton-cam/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable mysql_migration"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/afz/workzone/teton/teton-cam/simple-db-migration/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable mysql_migration"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mysql_migration.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -105,6 +121,6 @@ CMakeFiles/mysql_migration.dir/clean:
 .PHONY : CMakeFiles/mysql_migration.dir/clean
 
 CMakeFiles/mysql_migration.dir/depend:
-	cd /home/afz/workzone/msql-db-helper/teton-cam/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/afz/workzone/msql-db-helper/teton-cam /home/afz/workzone/msql-db-helper/teton-cam /home/afz/workzone/msql-db-helper/teton-cam/build /home/afz/workzone/msql-db-helper/teton-cam/build /home/afz/workzone/msql-db-helper/teton-cam/build/CMakeFiles/mysql_migration.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/afz/workzone/teton/teton-cam/simple-db-migration/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/afz/workzone/teton/teton-cam/simple-db-migration /home/afz/workzone/teton/teton-cam/simple-db-migration /home/afz/workzone/teton/teton-cam/simple-db-migration/build /home/afz/workzone/teton/teton-cam/simple-db-migration/build /home/afz/workzone/teton/teton-cam/simple-db-migration/build/CMakeFiles/mysql_migration.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/mysql_migration.dir/depend
 

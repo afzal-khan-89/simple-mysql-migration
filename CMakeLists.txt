@@ -9,7 +9,7 @@ include_directories(/usr/include/cppconn)  # MariaDB/MySQL connector headers
 
 link_directories(/usr/lib)  # adjust if your connector lib is elsewhere
 
-add_executable(mysql_migration mysql_migration.cpp)
+add_executable(mysql_migration mysql_migration.cpp Migration_parser.cpp)
 
 target_link_libraries(mysql_migration PRIVATE mysqlcppconn)
 

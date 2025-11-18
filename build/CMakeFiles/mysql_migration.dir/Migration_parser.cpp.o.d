@@ -1,6 +1,8 @@
-CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o: \
- /home/afz/workzone/teton/teton-cam/simple-db-migration/mysql_migration.cpp \
- /usr/include/stdc-predef.h /usr/include/c++/9/iostream \
+CMakeFiles/mysql_migration.dir/Migration_parser.cpp.o: \
+ /home/afz/workzone/teton/teton-cam/simple-db-migration/Migration_parser.cpp \
+ /usr/include/stdc-predef.h \
+ /home/afz/workzone/teton/teton-cam/simple-db-migration/Migration_parser.h \
+ /usr/include/c++/9/iostream \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h \
  /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
@@ -137,67 +139,57 @@ CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o: \
  /usr/include/c++/9/bits/locale_facets.tcc \
  /usr/include/c++/9/bits/basic_ios.tcc \
  /usr/include/c++/9/bits/ostream.tcc /usr/include/c++/9/istream \
- /usr/include/c++/9/bits/istream.tcc /usr/include/cppconn/driver.h \
- /usr/include/cppconn/connection.h /usr/include/c++/9/map \
- /usr/include/c++/9/bits/stl_tree.h \
- /usr/include/c++/9/ext/aligned_buffer.h \
- /usr/include/c++/9/bits/node_handle.h /usr/include/c++/9/optional \
- /usr/include/c++/9/utility /usr/include/c++/9/bits/stl_relops.h \
- /usr/include/c++/9/bits/enable_special_members.h \
- /usr/include/c++/9/bits/stl_map.h /usr/include/c++/9/tuple \
- /usr/include/c++/9/array /usr/include/c++/9/bits/uses_allocator.h \
- /usr/include/c++/9/bits/invoke.h /usr/include/c++/9/bits/stl_multimap.h \
- /usr/include/c++/9/bits/erase_if.h /usr/include/cppconn/build_config.h \
- /usr/include/cppconn/warning.h /usr/include/c++/9/memory \
+ /usr/include/c++/9/bits/istream.tcc /usr/include/c++/9/fstream \
+ /usr/include/c++/9/bits/codecvt.h \
+ /usr/include/x86_64-linux-gnu/c++/9/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/9/bits/c++io.h \
+ /usr/include/c++/9/bits/fstream.tcc /usr/include/c++/9/vector \
  /usr/include/c++/9/bits/stl_construct.h \
- /usr/include/c++/9/bits/stl_uninitialized.h \
- /usr/include/c++/9/bits/stl_tempbuf.h \
- /usr/include/c++/9/bits/stl_raw_storage_iter.h \
- /usr/include/c++/9/ext/concurrence.h \
- /usr/include/c++/9/bits/unique_ptr.h \
- /usr/include/c++/9/bits/shared_ptr.h \
- /usr/include/c++/9/bits/shared_ptr_base.h \
- /usr/include/c++/9/bits/allocated_ptr.h \
- /usr/include/c++/9/bits/refwrap.h \
- /usr/include/c++/9/bits/shared_ptr_atomic.h \
- /usr/include/c++/9/bits/atomic_base.h \
- /usr/include/c++/9/bits/atomic_lockfree_defines.h \
- /usr/include/c++/9/backward/auto_ptr.h \
- /usr/include/c++/9/pstl/glue_memory_defs.h \
- /usr/include/c++/9/pstl/execution_defs.h \
- /usr/include/cppconn/sqlstring.h /usr/include/c++/9/algorithm \
- /usr/include/c++/9/bits/stl_algo.h \
- /usr/include/c++/9/bits/algorithmfwd.h \
- /usr/include/c++/9/bits/stl_heap.h \
- /usr/include/c++/9/bits/uniform_int_dist.h \
- /usr/include/c++/9/pstl/glue_algorithm_defs.h \
- /usr/include/c++/9/functional /usr/include/c++/9/bits/std_function.h \
- /usr/include/c++/9/unordered_map /usr/include/c++/9/bits/hashtable.h \
- /usr/include/c++/9/bits/hashtable_policy.h \
- /usr/include/c++/9/bits/unordered_map.h /usr/include/c++/9/vector \
+ /usr/include/c++/9/bits/stl_uninitialized.h /usr/include/c++/9/utility \
+ /usr/include/c++/9/bits/stl_relops.h \
  /usr/include/c++/9/bits/stl_vector.h \
  /usr/include/c++/9/bits/stl_bvector.h /usr/include/c++/9/bits/vector.tcc \
- /usr/include/cppconn/variant.h /usr/include/c++/9/list \
- /usr/include/c++/9/bits/stl_list.h /usr/include/c++/9/bits/list.tcc \
- /usr/include/cppconn/exception.h /usr/include/cppconn/connection.h \
- /usr/include/cppconn/statement.h /usr/include/cppconn/config.h \
- /usr/include/inttypes.h /usr/include/cppconn/resultset.h \
- /usr/include/cppconn/resultset_metadata.h \
- /usr/include/cppconn/datatype.h \
- /usr/include/cppconn/prepared_statement.h \
- /usr/include/cppconn/statement.h /usr/include/cppconn/resultset.h \
- /usr/include/c++/9/regex /usr/include/c++/9/bitset \
+ /usr/include/c++/9/regex /usr/include/c++/9/algorithm \
+ /usr/include/c++/9/bits/stl_algo.h \
+ /usr/include/c++/9/bits/algorithmfwd.h \
+ /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
+ /usr/include/c++/9/bits/uniform_int_dist.h \
+ /usr/include/c++/9/pstl/glue_algorithm_defs.h \
+ /usr/include/c++/9/functional /usr/include/c++/9/tuple \
+ /usr/include/c++/9/array /usr/include/c++/9/bits/uses_allocator.h \
+ /usr/include/c++/9/bits/invoke.h /usr/include/c++/9/bits/refwrap.h \
+ /usr/include/c++/9/bits/std_function.h /usr/include/c++/9/unordered_map \
+ /usr/include/c++/9/ext/aligned_buffer.h \
+ /usr/include/c++/9/bits/hashtable.h \
+ /usr/include/c++/9/bits/hashtable_policy.h \
+ /usr/include/c++/9/bits/node_handle.h /usr/include/c++/9/optional \
+ /usr/include/c++/9/bits/enable_special_members.h \
+ /usr/include/c++/9/bits/unordered_map.h \
+ /usr/include/c++/9/bits/erase_if.h \
+ /usr/include/c++/9/pstl/execution_defs.h /usr/include/c++/9/bitset \
  /usr/include/c++/9/iterator /usr/include/c++/9/bits/stream_iterator.h \
  /usr/include/c++/9/locale /usr/include/c++/9/bits/locale_facets_nonio.h \
  /usr/include/c++/9/ctime \
  /usr/include/x86_64-linux-gnu/c++/9/bits/time_members.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/messages_members.h \
- /usr/include/libintl.h /usr/include/c++/9/bits/codecvt.h \
- /usr/include/c++/9/bits/locale_facets_nonio.tcc \
- /usr/include/c++/9/bits/locale_conv.h /usr/include/c++/9/sstream \
+ /usr/include/libintl.h /usr/include/c++/9/bits/locale_facets_nonio.tcc \
+ /usr/include/c++/9/bits/locale_conv.h \
+ /usr/include/c++/9/bits/unique_ptr.h /usr/include/c++/9/memory \
+ /usr/include/c++/9/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/9/ext/concurrence.h \
+ /usr/include/c++/9/bits/shared_ptr.h \
+ /usr/include/c++/9/bits/shared_ptr_base.h \
+ /usr/include/c++/9/bits/allocated_ptr.h \
+ /usr/include/c++/9/bits/shared_ptr_atomic.h \
+ /usr/include/c++/9/bits/atomic_base.h \
+ /usr/include/c++/9/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/9/backward/auto_ptr.h \
+ /usr/include/c++/9/pstl/glue_memory_defs.h /usr/include/c++/9/sstream \
  /usr/include/c++/9/bits/sstream.tcc /usr/include/c++/9/stack \
  /usr/include/c++/9/deque /usr/include/c++/9/bits/stl_deque.h \
  /usr/include/c++/9/bits/deque.tcc /usr/include/c++/9/bits/stl_stack.h \
+ /usr/include/c++/9/map /usr/include/c++/9/bits/stl_tree.h \
+ /usr/include/c++/9/bits/stl_map.h /usr/include/c++/9/bits/stl_multimap.h \
  /usr/include/c++/9/cstring /usr/include/string.h /usr/include/strings.h \
  /usr/include/c++/9/bits/regex_constants.h \
  /usr/include/c++/9/bits/regex_error.h \
@@ -215,10 +207,4 @@ CMakeFiles/mysql_migration.dir/mysql_migration.cpp.o: \
  /usr/include/c++/9/chrono /usr/include/c++/9/ratio \
  /usr/include/c++/9/bits/parse_numbers.h \
  /usr/include/c++/9/bits/std_mutex.h \
- /usr/include/c++/9/bits/unique_lock.h /usr/include/c++/9/unordered_set \
- /usr/include/c++/9/bits/unordered_set.h \
- /home/afz/workzone/teton/teton-cam/simple-db-migration/Migration_parser.h \
- /usr/include/c++/9/fstream \
- /usr/include/x86_64-linux-gnu/c++/9/bits/basic_file.h \
- /usr/include/x86_64-linux-gnu/c++/9/bits/c++io.h \
- /usr/include/c++/9/bits/fstream.tcc
+ /usr/include/c++/9/bits/unique_lock.h

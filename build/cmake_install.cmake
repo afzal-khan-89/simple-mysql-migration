@@ -1,4 +1,4 @@
-# Install script for directory: /home/afz/workzone/msql-db-helper/teton-cam
+# Install script for directory: /home/afz/workzone/teton/teton-cam/simple-db-migration
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/afz/workzone/msql-db-helper/teton-cam/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/afz/workzone/teton/teton-cam/simple-db-migration/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
